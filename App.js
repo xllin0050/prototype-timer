@@ -1,45 +1,54 @@
-import { config } from "@tamagui/config/v3";
-import "@tamagui/core/reset.css";
-import { useFonts } from "expo-font";
-import * as SplashScreen from "expo-splash-screen";
-import { StatusBar } from "expo-status-bar";
-import { useCallback } from "react";
-import { StyleSheet, Text, View } from "react-native";
-import { TamaguiProvider, createTamagui } from "tamagui";
-const tamaguiConfig = createTamagui(config);
+import { useState } from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+
+import Button from './components/Button';
+import WebWrapper from './components/WebWrapper';
 
 export default function App() {
-  const [fontsLoaded, fontError] = useFonts({
-    Inter: require("@tamagui/font-inter/otf/Inter-Medium.otf"),
-    InterBold: require("@tamagui/font-inter/otf/Inter-Bold.otf"),
-  });
-  const onLayoutRootView = useCallback(async () => {
-    if (fontsLoaded || fontError) {
-      await SplashScreen.hideAsync();
-    }
-  }, [fontsLoaded, fontError]);
+  const [intoBlack, setIntoBlack] = useState(false);
 
-  if (!fontsLoaded && !fontError) {
-    return null;
-  }
   return (
-    <TamaguiProvider config={tamaguiConfig}>
-      <View style={styles.container} onLayout={onLayoutRootView}>
-        <Text style={{ fontFamily: "InterBold", fontSize: 30 }}>
-          Open up App.js to start working on your app!
-        </Text>
-
-        <StatusBar style="auto" />
-      </View>
-    </TamaguiProvider>
+    <SafeAreaProvider>
+      <SafeAreaView style={{ flex: 1 }}>
+        <View style={styles.header}>
+          <Button iconName="user-clock" onPress={() => setIntoBlack(true)} />
+          <Text style={styles.title}>Now is your happy hour</Text>
+        </View>
+        <View style={styles.body}>
+          <WebWrapper url="https://www.youtube.com/" pause={intoBlack} />
+          {intoBlack && <View style={styles.overlay}></View>}
+        </View>
+      </SafeAreaView>
+    </SafeAreaProvider>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  header: {
+    paddingHorizontal: 12,
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#fff',
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#000',
+    paddingHorizontal: 16,
+  },
+  body: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
+    backgroundColor: 'white',
+    position: 'relative',
+  },
+  overlay: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'black',
+    opacity: 0.8,
   },
 });
