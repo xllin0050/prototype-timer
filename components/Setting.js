@@ -6,7 +6,14 @@ import { Picker } from '@react-native-picker/picker';
 import { StyleSheet, Text, View } from 'react-native';
 import Button from './Button';
 
-export default function Settings({ currentTime, settingTime, addHours, addMinutes, setting }) {
+export default function Settings({
+  currentTime,
+  settingTime,
+  addHours,
+  addMinutes,
+  restore,
+  setting,
+}) {
   const [selectedHourDigit, setSelectedHourDigit] = useState(0);
   const [selectedMinuteDigit, setSelectedMinuteDigit] = useState(0);
 
@@ -44,10 +51,30 @@ export default function Settings({ currentTime, settingTime, addHours, addMinute
       </View>
       <View style={styles.buttonsWrap}>
         <View style={styles.button}>
-          <Button iconName="circle-check" onPress={() => setting(true)} />
+          <Button
+            iconName="circle-check"
+            onPress={() => {
+              if (selectedHourDigit || selectedMinuteDigit) setting(true);
+            }}
+          />
         </View>
         <View style={styles.button}>
-          <Button iconName="circle-xmark" onPress={() => setting(false)} />
+          <Button
+            iconName="clock"
+            onPress={() => {
+              restore();
+              setSelectedHourDigit(0);
+              setSelectedMinuteDigit(0);
+            }}
+          />
+        </View>
+        <View style={styles.button}>
+          <Button
+            iconName="circle-xmark"
+            onPress={() => {
+              setting(false);
+            }}
+          />
         </View>
       </View>
     </View>

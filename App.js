@@ -16,6 +16,7 @@ export default function App() {
 
   // 更新設定視窗現在時間
   useEffect(() => {
+    if (settingOpend) setSettingTime(dayjs().format());
     const interval = setInterval(() => {
       setCurrentTime(dayjs().format());
     }, 1000);
@@ -35,6 +36,7 @@ export default function App() {
         remaining--;
       }, 1000);
     }
+    return () => {};
   }, [countdownStart]);
 
   return (
@@ -42,10 +44,10 @@ export default function App() {
       <SafeAreaView style={{ flex: 1 }}>
         <View style={styles.header}>
           <Button
-            iconName="user-clock"
+            iconName={intoBlack && !settingOpend ? 'eye-slash' : 'eye'}
             onPress={() => {
-              setIntoBlack(true);
               setSettingOpend(!settingOpend);
+              setIntoBlack(!settingOpend);
             }}
           />
           <Text style={styles.title}>Now is your happy hour</Text>
@@ -59,6 +61,9 @@ export default function App() {
               <Setting
                 currentTime={currentTime}
                 settingTime={settingTime}
+                restore={() => {
+                  setSettingTime(dayjs().format());
+                }}
                 setting={(bool) => {
                   setSettingOpend(false);
                   setCountdownStart(bool);
