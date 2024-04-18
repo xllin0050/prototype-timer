@@ -31,28 +31,35 @@ export default function Settings({
   }, [selectedMinuteDigit]);
   return (
     <View style={styles.container}>
-      <Text>Current:{dayjs(currentTime).format('hh:mm')}</Text>
-      <Text>Settings:{dayjs(settingTime).format('hh:mm')}</Text>
+      <View style={styles.timeDisplay}>
+        <Text style={{ fontSize: 18 }}>Current:{dayjs(currentTime).format('hh:mm')}</Text>
+        <Text style={{ fontSize: 18 }}>Settings:{dayjs(settingTime).format('hh:mm')}</Text>
+      </View>
       <View style={styles.pickersWrap}>
         <View style={styles.picker}>
           <Picker
             selectedValue={selectedHourDigit}
-            onValueChange={(itemValue, itemIndex) => setSelectedHourDigit(itemValue)}>
+            onValueChange={(itemValue, itemIndex) => setSelectedHourDigit(itemValue)}
+            style={{ width: 100, backgroundColor: '#e6f2ff' }}>
             {digitOptions(4)}
           </Picker>
+          <Text style={{ width: 20, paddingLeft: 8 }}>H</Text>
         </View>
         <View style={styles.picker}>
           <Picker
             selectedValue={selectedMinuteDigit}
-            onValueChange={(itemValue, itemIndex) => setSelectedMinuteDigit(itemValue)}>
+            onValueChange={(itemValue, itemIndex) => setSelectedMinuteDigit(itemValue)}
+            style={{ width: 100, backgroundColor: '#e6f2ff' }}>
             {digitOptions(60)}
           </Picker>
+          <Text style={{ width: 20, paddingLeft: 8 }}>M</Text>
         </View>
       </View>
       <View style={styles.buttonsWrap}>
         <View style={styles.button}>
           <Button
             iconName="circle-check"
+            bgColor="#003300"
             onPress={() => {
               if (selectedHourDigit || selectedMinuteDigit) setting(true);
             }}
@@ -61,6 +68,7 @@ export default function Settings({
         <View style={styles.button}>
           <Button
             iconName="clock"
+            bgColor="#669999"
             onPress={() => {
               restore();
               setSelectedHourDigit(0);
@@ -71,6 +79,7 @@ export default function Settings({
         <View style={styles.button}>
           <Button
             iconName="circle-xmark"
+            bgColor="#993366"
             onPress={() => {
               setting(false);
             }}
@@ -83,18 +92,31 @@ export default function Settings({
 const styles = StyleSheet.create({
   container: {
     width: '100%',
+    // height: '100%',
     backgroundColor: '#fff',
-    padding: 16,
+    paddingHorizontal: 8,
+    paddingVertical: 24,
+  },
+  timeDisplay: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    paddingVertical: 16,
   },
   pickersWrap: {
     flexDirection: 'row',
+    justifyContent: 'space-around',
+    paddingVertical: 16,
   },
   picker: {
-    width: '50%',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
   },
+
   buttonsWrap: {
     flexDirection: 'row',
     justifyContent: 'center',
+    paddingVertical: 16,
   },
   button: {
     width: '30%',

@@ -3,9 +3,9 @@ import React from 'react';
 import { Pressable, StyleSheet } from 'react-native';
 
 export default function Button(props) {
-  const { onPress, iconName = 'Save' } = props;
+  const { onPress, iconName = 'Save', bgColor = 'black' } = props;
   return (
-    <Pressable style={styles.button} onPress={onPress}>
+    <Pressable style={[styles.button, { backgroundColor: bgColor }]} onPress={onPress}>
       <FontAwesome6 name={iconName} size={16} color="white" />
     </Pressable>
   );
@@ -19,6 +19,5 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     borderRadius: 4,
     elevation: 3,
-    backgroundColor: 'black',
   },
 });

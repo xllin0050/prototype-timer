@@ -52,7 +52,6 @@ export default function App() {
           />
           <Text style={styles.title}>Now is your happy hour</Text>
         </View>
-        <Text>{dayjs(settingTime).format('hh:mm')}</Text>
         <View style={styles.body}>
           <WebWrapper url="https://www.google.com/" pause={intoBlack} />
           {intoBlack && <View style={styles.overlay}></View>}
