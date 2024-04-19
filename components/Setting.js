@@ -40,7 +40,7 @@ export default function Settings({
           <Picker
             selectedValue={selectedHourDigit}
             onValueChange={(itemValue, itemIndex) => setSelectedHourDigit(itemValue)}
-            style={{ width: 100, backgroundColor: '#e6f2ff' }}>
+            style={{ width: 100, backgroundColor: '#EAF2F8' }}>
             {digitOptions(4)}
           </Picker>
           <Text style={{ width: 20, paddingLeft: 8 }}>H</Text>
@@ -49,7 +49,7 @@ export default function Settings({
           <Picker
             selectedValue={selectedMinuteDigit}
             onValueChange={(itemValue, itemIndex) => setSelectedMinuteDigit(itemValue)}
-            style={{ width: 100, backgroundColor: '#e6f2ff' }}>
+            style={{ width: 100, backgroundColor: '#EAF2F8' }}>
             {digitOptions(60)}
           </Picker>
           <Text style={{ width: 20, paddingLeft: 8 }}>M</Text>
@@ -59,7 +59,7 @@ export default function Settings({
         <View style={styles.button}>
           <Button
             iconName="circle-check"
-            bgColor="#003300"
+            bgColor="#7DCEA0"
             onPress={() => {
               if (selectedHourDigit || selectedMinuteDigit) setting(true);
             }}
@@ -68,7 +68,7 @@ export default function Settings({
         <View style={styles.button}>
           <Button
             iconName="clock"
-            bgColor="#669999"
+            bgColor="#F7DC6F"
             onPress={() => {
               restore();
               setSelectedHourDigit(0);
@@ -79,7 +79,7 @@ export default function Settings({
         <View style={styles.button}>
           <Button
             iconName="circle-xmark"
-            bgColor="#993366"
+            bgColor="#F1948A"
             onPress={() => {
               setting(false);
             }}

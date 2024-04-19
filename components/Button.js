@@ -3,7 +3,7 @@ import React from 'react';
 import { Pressable, StyleSheet } from 'react-native';
 
 export default function Button(props) {
-  const { onPress, iconName = 'Save', bgColor = 'black' } = props;
+  const { onPress, iconName = 'Save', bgColor = '#34495E' } = props;
   return (
     <Pressable style={[styles.button, { backgroundColor: bgColor }]} onPress={onPress}>
       <FontAwesome6 name={iconName} size={16} color="white" />

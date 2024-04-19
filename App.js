@@ -53,7 +53,7 @@ export default function App() {
           <Text style={styles.title}>Now is your happy hour</Text>
         </View>
         <View style={styles.body}>
-          <WebWrapper url="https://www.google.com/" pause={intoBlack} />
+          <WebWrapper url="https://www.youtube.com/" pause={intoBlack} />
           {intoBlack && <View style={styles.overlay}></View>}
           {settingOpend && (
             <View style={styles.modal}>
@@ -89,16 +89,21 @@ export default function App() {
 
 const styles = StyleSheet.create({
   header: {
-    paddingHorizontal: 12,
+    paddingHorizontal: 18,
+    paddingVertical: 4,
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#fff',
+    justifyContent: 'flex-start',
+    backgroundColor: '#F4D03F',
+    position: 'relative',
   },
   title: {
-    fontSize: 24,
+    position: 'absolute',
+    fontSize: 18,
     fontWeight: 'bold',
-    color: '#000',
-    paddingHorizontal: 16,
+    color: '#FCF3CF',
+    left: '50%',
+    transform: [{ translateX: -65 }],
   },
   body: {
     flex: 1,
